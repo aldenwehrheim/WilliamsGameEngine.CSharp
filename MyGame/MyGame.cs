@@ -4,10 +4,10 @@ namespace MyGame
 {
     public static class MyGame
     {
-        private const int WindowWidth = 800;
-        private const int WindowHeight = 600;
+        private const int WindowWidth = 1300;
+        private const int WindowHeight = 750;
 
-        private const string WindowTitle = "My Awesome Game";
+        private const string WindowTitle = "spaceship destroyer";
 
         public static void Main(string[] args)
         {

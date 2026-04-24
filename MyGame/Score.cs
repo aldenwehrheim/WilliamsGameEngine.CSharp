@@ -1,0 +1,33 @@
+using SFML.System;
+using SFML.Graphics;
+using GameEngine;
+
+namespace MyGame
+{
+
+    class Score : GameObject
+    {
+        private readonly Text _text = new Text();
+
+        public Score (Vector2f pos)
+        {
+            _text.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
+            _text.Position = pos;
+            _text.CharacterSize = 24;
+            _text.FillColor = Color.White;
+
+            AssignTag("score");
+        }
+
+        public override void Draw()
+        {
+            Game.RenderWindow.Draw(_text);
+        }
+
+        public override void Update(Time elapsed)
+        {
+            GameScene scene = (GameScene)Game.CurrentScene;
+            _text.DisplayedString = "score: " + scene.GetScore();
+        }
+    }
+}
