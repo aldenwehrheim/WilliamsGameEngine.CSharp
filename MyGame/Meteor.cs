@@ -56,7 +56,8 @@ namespace MyGame
          
          if(pos.X < Game.RenderWindow.Size.X * -1)
             {
-             GameScene scene = (GameScene)gane
+             GameScene scene = (GameScene)Game.CurrentScene;
+             scene.DecreaseLives();
              
              MakeDead();
             }
