@@ -77,7 +77,15 @@ namespace MyGame
                 Game.CurrentScene.AddGameObject(laser3);
             
             } 
-        
+        if (Keyboard.IsKeyPressed(Keyboard.Key.F) && _fireTimer <= 0)
+            {
+               _fireTimer = FireDelay;  
+               FloatRect bounds = _sprite.GetGlobalBounds();
+                float boltx = x + bounds.Width;
+                float boltY = y + bounds.Height / 25f;
+                Mega_bolt bolt = new Mega_bolt (new Vector2f(boltx, boltY));
+                Game.CurrentScene.AddGameObject(bolt);
+            }
         }
     
     }
