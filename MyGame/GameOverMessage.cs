@@ -19,15 +19,7 @@ namespace MyGame
         {
             Score = score;
             GameScene scene = (GameScene)Game.CurrentScene;
-
-             if (Score > Convert.ToInt32(scene.highscore))
-            {
-
-                StreamWriter writer = new StreamWriter("../../../highscore.txt");
-                writer.WriteLine(Score);
-                writer.Close();
-            }
-
+    
             _text.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
             _text.Position = new Vector2f(50.0f, 50.0f);
             _text.CharacterSize = 48;

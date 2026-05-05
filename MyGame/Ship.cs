@@ -11,7 +11,7 @@ namespace MyGame
 {
     public class Ship : GameObject
     {
-        private const float Speed = 0.3f;
+        private const float Speed = 0.5f;
         private const int FireDelay = 200;
         private int _fireTimer = 0;
         private readonly Sprite _sprite = new Sprite();

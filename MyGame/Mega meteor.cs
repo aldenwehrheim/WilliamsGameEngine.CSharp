@@ -9,17 +9,17 @@ using System.Runtime.InteropServices;
 
 namespace MyGame
 {
-    public class Meteor : GameObject
+    public class Mega_meteor : GameObject
     {
         private const float Speed = 0.45f;
              private readonly Sprite _sprite = new Sprite();
 
-         public Meteor(Vector2f pos)
+         public Mega_meteor(Vector2f pos)
         {
-            _sprite.Texture = Game.GetTexture("Resources/meteor.png");
+            _sprite.Texture = Game.GetTexture("Resources/big_meteor.png");
             _sprite.Position = pos;
 
-            AssignTag("meteor");
+            AssignTag("big_meteor");
             SetCollisionCheckEnabled(true);
         }
         public override FloatRect GetCollisionRect()
@@ -32,22 +32,24 @@ namespace MyGame
             {
                 otherGameObject.MakeDead();
                 GameScene scene = (GameScene)Game.CurrentScene;
-                scene.IncreaseScore();
             }       
             else if (otherGameObject.HasTag("bolt"))
             {
-               
+                otherGameObject.MakeDead();
                 GameScene scene = (GameScene)Game.CurrentScene;
                 scene.IncreaseScore();
+                MakeDead();
             }     
-            MakeDead();
-           
-            Vector2f pos =_sprite.Position;
-            pos.X = pos.X + _sprite.GetGlobalBounds().Width / 2.0f;
-            pos.Y = pos.Y + _sprite.GetGlobalBounds().Height / 2.0f;
+            
+            if (IsDead())
+            {
+                Vector2f pos =_sprite.Position;
+                pos.X = pos.X + _sprite.GetGlobalBounds().Width / 2.0f;
+                pos.Y = pos.Y + _sprite.GetGlobalBounds().Height / 2.0f;
 
-            Explosion explosion = new Explosion(pos);
-            Game.CurrentScene.AddGameObject(explosion);
+                Explosion explosion = new Explosion(pos);
+                Game.CurrentScene.AddGameObject(explosion);
+            }
         }
 
         public override void Draw()
