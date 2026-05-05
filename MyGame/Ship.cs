@@ -13,7 +13,9 @@ namespace MyGame
     {
         private const float Speed = 0.5f;
         private const int FireDelay = 200;
+        private const int boltFireDelay = 700;
         private int _fireTimer = 0;
+        private int _boltfireTimer = 0;
         private readonly Sprite _sprite = new Sprite();
 
 
@@ -21,10 +23,15 @@ namespace MyGame
         {
          _sprite.Texture = Game.GetTexture("Resources/ship.png");
          _sprite.Position = new Vector2f(100, 100);
+        AssignTag("ship");
         }
         public override void Draw()
         {
          Game.RenderWindow.Draw(_sprite);
+        }
+        public override FloatRect GetCollisionRect()
+        {
+            return _sprite.GetGlobalBounds();
         }
         public override void Update(Time elapsed)
         {
@@ -49,6 +56,10 @@ namespace MyGame
         if (_fireTimer > 0)
             {
                 _fireTimer -= msElapesed;
+            }
+        if (_boltfireTimer > 0)
+            {
+                _boltfireTimer -= msElapesed;
             }
         
         if(Keyboard.IsKeyPressed(Keyboard.Key.Space) && _fireTimer <= 0)
@@ -77,9 +88,9 @@ namespace MyGame
                 Game.CurrentScene.AddGameObject(laser3);
             
             } 
-        if (Keyboard.IsKeyPressed(Keyboard.Key.F) && _fireTimer <= 0)
+        if (Keyboard.IsKeyPressed(Keyboard.Key.F) && _boltfireTimer <= 0)
             {
-               _fireTimer = FireDelay;  
+               _boltfireTimer = boltFireDelay;  
                FloatRect bounds = _sprite.GetGlobalBounds();
                 float boltx = x + bounds.Width;
                 float boltY = y + bounds.Height / 25f;
