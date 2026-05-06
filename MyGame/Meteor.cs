@@ -56,7 +56,7 @@ namespace MyGame
             Vector2f Pos = _sprite.Position;
             float x = Pos.X;
             float y = Pos.Y;
-            int dropchance = (random.Next(5,5));
+            int dropchance = (random.Next(1,10));
             if (otherGameObject.HasTag("laser"))
             {
                 otherGameObject.MakeDead();
@@ -65,10 +65,10 @@ namespace MyGame
                 if (dropchance == 5)
                 {
                 FloatRect bounds = _sprite.GetGlobalBounds();
-                float upgradex = x + bounds.Width;
-                float upgradey = y + bounds.Height;  
-                Upgrade_laser Up_laser = new Upgrade_laser (new Vector2f(upgradex, upgradey));
-                Game.CurrentScene.AddGameObject(Up_laser);
+                float coinx = x + bounds.Width;
+                float coiny = y + bounds.Height;  
+                Coin_drop coin = new Coin_drop (new Vector2f(coinx, coiny));
+                Game.CurrentScene.AddGameObject(coin);
                 }
 
             }       
@@ -76,28 +76,28 @@ namespace MyGame
             {
                 GameScene scene = (GameScene)Game.CurrentScene;
                 scene.IncreaseScore();
-                int Dropchance = (random.Next(5,5));
+                int Dropchance = (random.Next(1,10));
                 if (dropchance == 5)
                 {
                  FloatRect bounds = _sprite.GetGlobalBounds();
-                float upgradex = x + bounds.Width;
-                float upgradey = y + bounds.Height;  
-                Upgrade_laser Up_laser = new Upgrade_laser (new Vector2f(upgradex, upgradey));
-                Game.CurrentScene.AddGameObject(Up_laser);   
+                float coinx = x + bounds.Width;
+                float coiny = y + bounds.Height;  
+                Coin_drop coin = new Coin_drop (new Vector2f(coinx, coiny));
+                Game.CurrentScene.AddGameObject(coin); 
                 }
             }     
             else if (otherGameObject.HasTag("ship"))
             {
-              int Dropchance = (random.Next(5,5));
+              int Dropchance = (random.Next(1,10));
                 GameScene scene = (GameScene)Game.CurrentScene;
                 scene.IncreaseScore();
                 if (dropchance == 5)
                 {
                  FloatRect bounds = _sprite.GetGlobalBounds();
-                float upgradex = x + bounds.Width;
-                float upgradey = y + bounds.Height;  
-                Upgrade_laser Up_laser = new Upgrade_laser (new Vector2f(upgradex, upgradey));
-                Game.CurrentScene.AddGameObject(Up_laser);   
+                float coinx = x + bounds.Width;
+                float coiny = y + bounds.Height;  
+                Coin_drop coin = new Coin_drop (new Vector2f(coinx, coiny));
+                Game.CurrentScene.AddGameObject(coin);   
                 }  
                 scene.DecreaseLives();
             }

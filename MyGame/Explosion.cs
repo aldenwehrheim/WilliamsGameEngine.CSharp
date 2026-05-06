@@ -10,15 +10,15 @@ namespace MyGame
 {
     class Explosion : AnimatedSprite
     {
-        private readonly Sound _Boom= new Sound();
-      
+        private readonly Sound _explosion= new Sound();
+        
      public Explosion(Vector2f pos) : base(pos)
         {
             Texture = Game.GetTexture("Resources/explosion-spritesheet.png");
             SetUpExplosionAnimation();
             PlayAnimation("explosion",AnimationMode.OnceForwards);
-            _Boom.SoundBuffer = Game.GetSoundBuffer("Resources/boom.wav");
-            _Boom.Play();
+            _explosion.SoundBuffer = Game.GetSoundBuffer("Resources/explosion.wav");
+            _explosion.Play();
         }
      public override void Update(Time elapsed)
         {

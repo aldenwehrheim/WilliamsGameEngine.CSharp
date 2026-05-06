@@ -1,4 +1,5 @@
 using GameEngine;
+using SFML.Audio;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
@@ -9,8 +10,10 @@ using System.Numerics;
 
 namespace MyGame
 {
+   
     public class Ship : GameObject
     {
+        private readonly Sound _pew = new Sound();
         private const float Speed = 0.5f;
         private const int FireDelay = 200;
         private const int boltFireDelay = 700;
@@ -21,6 +24,7 @@ namespace MyGame
 
         public Ship()
         {
+         
          _sprite.Texture = Game.GetTexture("Resources/ship.png");
          _sprite.Position = new Vector2f(100, 100);
         AssignTag("ship");
@@ -35,6 +39,7 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
+          
          Vector2f pos = _sprite.Position;
          float x = pos.X;
          float y = pos.Y;
@@ -65,7 +70,8 @@ namespace MyGame
         if(Keyboard.IsKeyPressed(Keyboard.Key.Space) && _fireTimer <= 0)
             {
                 _fireTimer = FireDelay;
-
+                _pew.SoundBuffer= Game.GetSoundBuffer("Resources/laserShoot.wav");
+                _pew.Play();
                 FloatRect bounds = _sprite.GetGlobalBounds();
                 float laserx = x + bounds.Width;
                 float laserY = y + bounds.Height / 1.2f;
@@ -94,6 +100,8 @@ namespace MyGame
                FloatRect bounds = _sprite.GetGlobalBounds();
                 float boltx = x + bounds.Width;
                 float boltY = y + bounds.Height / 25f;
+                _pew.SoundBuffer= Game.GetSoundBuffer("Resources/laserShoot.wav");
+                _pew.Play();
                 Mega_bolt bolt = new Mega_bolt (new Vector2f(boltx, boltY));
                 Game.CurrentScene.AddGameObject(bolt);
             }

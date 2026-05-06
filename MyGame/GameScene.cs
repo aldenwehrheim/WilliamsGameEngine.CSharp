@@ -14,6 +14,7 @@ namespace MyGame
     public class GameScene : Scene
     {
         public string highscore;
+        private int _coins = 0;
         private int _score = 0;
         private int _lives = 3;
         public GameScene()
@@ -24,21 +25,32 @@ namespace MyGame
             AddGameObject(meteor_Spawner);
             Score score = new Score(new Vector2f(10.0f, 10.0f));
             AddGameObject(score);
-            lives_tracker lives = new lives_tracker(new Vector2f(10.0f, 40.0f));
+            lives_tracker lives = new lives_tracker(new Vector2f(10.0f, 70.0f));
             AddGameObject (lives);
-           
+            Text_coins coins = new Text_coins (new Vector2f(10.0f, 40.0f));
+            AddGameObject (coins);
         }
        
         public int GetScore()
         {
             return _score;
         }
-
+        public int GetCoins()
+        {
+            return _coins;
+        }
         public void IncreaseScore()
         {
             ++_score;
         }
-
+        public void IncreaseCoins()
+        {
+            ++_coins;
+        }
+        public void DecreaseCoins()
+        {
+            --_coins;
+        }
         public int Getlives()
         {
             return _lives;
