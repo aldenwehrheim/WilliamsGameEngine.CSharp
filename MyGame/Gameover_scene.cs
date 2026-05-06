@@ -2,14 +2,15 @@ using GameEngine;
 
 namespace MyGame
 {
-    class Scenechanger : Scene
+    class Gameover_scene : Scene
     {
-        public Scenechanger(int score)
+        public Gameover_scene(int score)
         {
-            
             GameOverMessage gameOverMessage = new GameOverMessage(score);
             AddGameObject(gameOverMessage);
+           
         }
+    
     }
 }
 

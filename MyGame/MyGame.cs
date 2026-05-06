@@ -24,5 +24,6 @@ namespace MyGame
             // Run the game loop.
             Game.Run();
         }
+    
     }
 }

@@ -14,6 +14,7 @@ namespace MyGame
     public class GameScene : Scene
     {
         public string highscore;
+        private int _changetoshop = 50;
         private int _coins = 0;
         private int _score = 0;
         private int _lives = 3;
@@ -42,6 +43,15 @@ namespace MyGame
         public void IncreaseScore()
         {
             ++_score;
+            int score_changer = _score;
+            if (score_changer >= 1)
+            {
+              StreamWriter writer = new StreamWriter("../../../save.txt");
+              writer.Write(_lives);
+              writer.Close();
+              shop_scene shop = new shop_scene(_coins);
+              Game.SetScene(shop); 
+            }
         }
         public void IncreaseCoins()
         {
@@ -61,10 +71,11 @@ namespace MyGame
             --_lives;
             if (_lives == 0)
             {
-                GameOverScene gameOverScene = new GameOverScene(_score);
+                Gameover_scene gameOverScene = new Gameover_scene(_score);
                 Game.SetScene(gameOverScene);
             }
         }
+        
         }
 
 }

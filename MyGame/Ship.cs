@@ -105,6 +105,8 @@ namespace MyGame
                 Mega_bolt bolt = new Mega_bolt (new Vector2f(boltx, boltY));
                 Game.CurrentScene.AddGameObject(bolt);
             }
+      
+        
         }
     
     }
