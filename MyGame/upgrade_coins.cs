@@ -12,15 +12,15 @@ namespace MyGame
 {
   
 
-    public class Upgrade_lives  : GameObject
+    public class Upgrade_coins  : GameObject
     {
           private readonly Sprite _sprite = new Sprite();
 
-         public Upgrade_lives(Vector2f pos)
+         public Upgrade_coins(Vector2f pos)
         {
-            _sprite.Texture = Game.GetTexture("Resources/upgrade_lives.png");
+            _sprite.Texture = Game.GetTexture("Resources/upgrade_coin.png");
             _sprite.Position = pos;
-            AssignTag("livesupgrade");
+            AssignTag("coinsupgrade");
             SetCollisionCheckEnabled(true);
         
         }

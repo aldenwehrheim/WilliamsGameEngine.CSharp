@@ -18,6 +18,7 @@ namespace MyGame
         private readonly Text _boosttext = new Text();
         private readonly Text _cointext = new Text();
         private readonly Text _entertext = new Text();
+        private readonly Text _displaycointext = new Text();
         private int Coins;
 
         public shop_message(int _coins)
@@ -54,6 +55,12 @@ namespace MyGame
             _entertext.CharacterSize = 30;
             _entertext.FillColor = Color.White;
             _entertext.DisplayedString = "(ENTER) to go next";
+
+            _displaycointext.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
+            _displaycointext.Position = new Vector2f(95.0f, 660.0f);
+            _displaycointext.CharacterSize = 30;
+            _displaycointext.FillColor = Color.White;
+            _displaycointext.DisplayedString = "Coins: " + Coins;
         }
 
         public override void Draw()
@@ -63,6 +70,7 @@ namespace MyGame
             Game.RenderWindow.Draw(_boosttext);
             Game.RenderWindow.Draw(_cointext);
             Game.RenderWindow.Draw(_entertext);
+            Game.RenderWindow.Draw(_displaycointext);
         }
 
         public override void Update(Time elapsed)

@@ -77,12 +77,7 @@ namespace MyGame
                     Game.CurrentScene.AddGameObject(coin);
                 }
                 MakeDead();
-                Vector2f pos = _sprite.Position;
-                    pos.X = pos.X + _sprite.GetGlobalBounds().Width / 2.0f;
-                    pos.Y = pos.Y + _sprite.GetGlobalBounds().Height / 2.0f;
-
-                    Explosion explosion = new Explosion(pos);
-                    Game.CurrentScene.AddGameObject(explosion);
+                
             }
             else if (otherGameObject.HasTag("ship"))
             {
@@ -96,15 +91,11 @@ namespace MyGame
                     float coiny = y + bounds.Height;
                     Coin_drop coin = new Coin_drop(new Vector2f(coinx, coiny));
                     Game.CurrentScene.AddGameObject(coin);
+                }
                     scene.DecreaseLives();
                     MakeDead();
-                    Vector2f pos = _sprite.Position;
-                    pos.X = pos.X + _sprite.GetGlobalBounds().Width / 2.0f;
-                    pos.Y = pos.Y + _sprite.GetGlobalBounds().Height / 2.0f;
-
-                    Explosion explosion = new Explosion(pos);
-                    Game.CurrentScene.AddGameObject(explosion);
-                }
+                 
+            }
                 if (IsDead())
                 {
                     Vector2f pos = _sprite.Position;
@@ -114,7 +105,7 @@ namespace MyGame
                     Explosion explosion = new Explosion(pos);
                     Game.CurrentScene.AddGameObject(explosion);
                 }
-            }
+            
 
 
         }
