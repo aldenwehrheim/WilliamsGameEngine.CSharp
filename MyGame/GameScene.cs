@@ -71,7 +71,7 @@ namespace MyGame
         {
             ++_score;
             ++_score_keeptrack;
-            if (_score_keeptrack >= 50)
+            if (_score_keeptrack >= 1)
             {
               StreamWriter writer = new StreamWriter("../../../save.txt");
               writer.WriteLine($"{_lives},{_score},{_coins}");
@@ -88,6 +88,10 @@ namespace MyGame
         {
             --_coins;
         }
+        public void ShopDecreaseCoins()
+        {
+            _coins -= 10;
+        }
         public int Getlives()
         {
             return _lives;
@@ -102,7 +106,10 @@ namespace MyGame
                 Game.SetScene(gameOverScene);
             }
         }
-        
+        public void ShopIncreaseLives()
+        {
+            _lives += 5;
+        }
         }
 
 }

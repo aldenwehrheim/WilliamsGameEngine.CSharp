@@ -6,13 +6,16 @@ using System;
 using System.Formats.Asn1;
 using System.IO;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Xml.Linq;
+using SFML.Audio;
 
 namespace MyGame
 {
     class shop_message :  GameObject
     {
+        private readonly Sound _pickup= new Sound();
         private readonly Text _guntext = new Text();
         private readonly Text _livestext = new Text();
         private readonly Text _boosttext = new Text();
@@ -21,8 +24,11 @@ namespace MyGame
         private readonly Text _displaycointext = new Text();
         private int Coins;
 
+       
         public shop_message(int _coins)
         {
+            
+            
             Coins = _coins;
             GameScene scene = (GameScene)Game.CurrentScene;
         
@@ -65,6 +71,7 @@ namespace MyGame
 
         public override void Draw()
         {
+            
             Game.RenderWindow.Draw(_guntext);
             Game.RenderWindow.Draw(_livestext);
             Game.RenderWindow.Draw(_boosttext);
@@ -75,7 +82,23 @@ namespace MyGame
 
         public override void Update(Time elapsed)
         {
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
+            
+            
+            if (Keyboard.IsKeyPressed(Keyboard.Key.U))
+            {
+                GameScene scene = new GameScene();
+                int Shop_coins = scene.GetCoins();
+                if (Shop_coins >= 10)
+                {
+                scene.ShopDecreaseCoins();
+                scene.ShopIncreaseLives();
+                _pickup.SoundBuffer = Game.GetSoundBuffer("Resources/pickup.wav");
+                _pickup.Play();
+                }
+                else{}
+            }
+
+            else if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
             {
                 GameScene scene = new GameScene();
                 Game.SetScene(scene);
