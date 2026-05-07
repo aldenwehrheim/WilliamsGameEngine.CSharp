@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Formats.Asn1;
 using System.IO;
 using System.Net.Http.Headers;
@@ -13,13 +14,18 @@ namespace MyGame
    
     public class GameScene : Scene
     {
+        
         public string highscore;
-        private int _changetoshop = 50;
+        private int _score_keeptrack = 0;
         private int _coins = 0;
         private int _score = 0;
         private int _lives = 3;
+        private string saved_lives;
+        private string saved_score;
+        private string saved_coins;
         public GameScene()
         {
+            
             Ship ship = new Ship();
             AddGameObject(ship);
             Meteor_spawner meteor_Spawner = new Meteor_spawner();
@@ -30,6 +36,27 @@ namespace MyGame
             AddGameObject (lives);
             Text_coins coins = new Text_coins (new Vector2f(10.0f, 40.0f));
             AddGameObject (coins);
+            
+            StreamReader reader = new StreamReader("../../../save.txt");
+                while (!reader.EndOfStream)
+                {
+                    string readfileline = reader.ReadLine();
+                    string [] data = readfileline.Split(',');
+                    saved_lives = data[0];
+                    saved_score = data[1];
+                    saved_coins = data[2];
+                }
+                reader.Close();
+            
+            _lives = Convert.ToInt32(saved_lives);
+            _coins = Convert.ToInt32(saved_coins);
+            _score = Convert.ToInt32(saved_score);
+            
+            if (_lives <= 0)
+            {
+                _lives = 3;
+            }
+            
         }
        
         public int GetScore()
@@ -43,11 +70,11 @@ namespace MyGame
         public void IncreaseScore()
         {
             ++_score;
-            int score_changer = _score;
-            if (score_changer >= 1)
+            ++_score_keeptrack;
+            if (_score_keeptrack >= 1)
             {
               StreamWriter writer = new StreamWriter("../../../save.txt");
-              writer.Write(_lives);
+              writer.WriteLine($"{_lives},{_score},{_coins}");
               writer.Close();
               shop_scene shop = new shop_scene(_coins);
               Game.SetScene(shop); 

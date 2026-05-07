@@ -7,29 +7,62 @@ using System.Formats.Asn1;
 using System.IO;
 using System.Net;
 using System.Threading;
+using System.Xml.Linq;
 
 namespace MyGame
 {
     class shop_message :  GameObject
     {
-        private readonly Text _text = new Text();
+        private readonly Text _guntext = new Text();
+        private readonly Text _livestext = new Text();
+        private readonly Text _boosttext = new Text();
+        private readonly Text _cointext = new Text();
+        private readonly Text _entertext = new Text();
         private int Coins;
 
         public shop_message(int _coins)
         {
             Coins = _coins;
             GameScene scene = (GameScene)Game.CurrentScene;
-            
-            _text.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
-            _text.Position = new Vector2f(50.0f, 50.0f);
-            _text.CharacterSize = 48;
-            _text.FillColor = Color.White;
-            _text.DisplayedString = "test 50,50";
+        
+            _guntext.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
+            _guntext.Position = new Vector2f(100.0f, 375.0f);
+            _guntext.CharacterSize = 20;
+            _guntext.FillColor = Color.White;
+            _guntext.DisplayedString = "press (1) to buy a laser upgrade\nprice: 15";
+
+            _livestext.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
+            _livestext.Position = new Vector2f(450.0f, 375.0f);
+            _livestext.CharacterSize = 20;
+            _livestext.FillColor = Color.White;
+            _livestext.DisplayedString = "press (2) to buy 5 lives\nprice: 10";
+
+            _boosttext.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
+            _boosttext.Position = new Vector2f(680.0f, 375.0f);
+            _boosttext.CharacterSize = 20;
+            _boosttext.FillColor = Color.White;
+            _boosttext.DisplayedString = "press (3) to buy a boost upgrade\nprice: 15";
+
+            _cointext.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
+            _cointext.Position = new Vector2f(1000.0f, 375.0f);
+            _cointext.CharacterSize = 20;
+            _cointext.FillColor = Color.White;
+            _cointext.DisplayedString = "press (4) to buy a coin upgrade\nprice: 20";
+
+            _entertext.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
+            _entertext.Position = new Vector2f(500.0f, 600.0f);
+            _entertext.CharacterSize = 30;
+            _entertext.FillColor = Color.White;
+            _entertext.DisplayedString = "(ENTER) to go next";
         }
 
         public override void Draw()
         {
-            Game.RenderWindow.Draw(_text);
+            Game.RenderWindow.Draw(_guntext);
+            Game.RenderWindow.Draw(_livestext);
+            Game.RenderWindow.Draw(_boosttext);
+            Game.RenderWindow.Draw(_cointext);
+            Game.RenderWindow.Draw(_entertext);
         }
 
         public override void Update(Time elapsed)
@@ -38,7 +71,7 @@ namespace MyGame
             {
                 GameScene scene = new GameScene();
                 Game.SetScene(scene);
-            }
+            }        
         }
     }
 }

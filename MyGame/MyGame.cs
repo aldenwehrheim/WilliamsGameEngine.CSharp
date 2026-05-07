@@ -16,11 +16,12 @@ namespace MyGame
         {
             // Initialize the game.
             Game.Initialize(WindowWidth, WindowHeight, WindowTitle);
-            
+            StreamWriter writer = new StreamWriter("../../../save.txt");
+              writer.WriteLine($"{3},{0},{0}");
+              writer.Close();
             // Create our scene.
             GameScene scene = new GameScene();
             Game.SetScene(scene);
-           
             // Run the game loop.
             Game.Run();
         }
