@@ -25,7 +25,7 @@ namespace MyGame
         public Ship()
         {
          
-         _sprite.Texture = Game.GetTexture("Resources/ship.png");
+         _sprite.Texture = Game.GetTexture("Resources/ship_3.png");
          _sprite.Position = new Vector2f(100, 100);
         AssignTag("ship");
         }

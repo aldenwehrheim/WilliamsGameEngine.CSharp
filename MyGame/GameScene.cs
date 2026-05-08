@@ -71,7 +71,7 @@ namespace MyGame
         {
             ++_score;
             ++_score_keeptrack;
-            if (_score_keeptrack >= 1)
+            if (_score_keeptrack >= 50)
             {
               StreamWriter writer = new StreamWriter("../../../save.txt");
               writer.WriteLine($"{_lives},{_score},{_coins}");

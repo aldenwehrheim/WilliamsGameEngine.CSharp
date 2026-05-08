@@ -12,7 +12,7 @@ namespace MyGame
     public class Meteor : GameObject
     {
         private Random random = new Random();
-
+        
         private const float Speed = 0.45f;
              private readonly Sprite _sprite = new Sprite();
 

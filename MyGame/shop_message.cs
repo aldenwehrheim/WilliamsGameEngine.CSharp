@@ -97,7 +97,7 @@ namespace MyGame
                 }
                 else{}
             }
-
+            
             else if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
             {
                 GameScene scene = new GameScene();
