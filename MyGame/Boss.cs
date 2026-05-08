@@ -1,33 +1,27 @@
 using GameEngine;
-using SFML.Audio;
 using SFML.Graphics;
 using SFML.System;
-using SFML.Window;
-
-
 using System;
+using System.Diagnostics;
+using System.Net.Http.Headers;
 using System.Numerics;
+using System.Runtime.InteropServices;
 
 namespace MyGame
 {
-   
-    public class Ship : GameObject
+    public class Boss : GameObject
     {
-        private readonly Sound _pew = new Sound();
+        private Random Move = new Random();
+        private Random Shoot = new Random();
+        private Random Big_shoot = new Random();
         private const float Speed = 0.5f;
-        private const int FireDelay = 200;
-        private const int boltFireDelay = 700;
-        private int _fireTimer = 0;
-        private int _boltfireTimer = 0;
         private readonly Sprite _sprite = new Sprite();
-
-
-        public Ship()
+        public Boss()
         {
          
-         _sprite.Texture = Game.GetTexture("Resources/ship.png");
-         _sprite.Position = new Vector2f(100, 100);
-        AssignTag("ship");
+         _sprite.Texture = Game.GetTexture("Resources/death_ship_of doom.png");
+         _sprite.Position = new Vector2f(1000,300);
+        AssignTag("bad_ship");
         }
         public override void Draw()
         {
@@ -44,34 +38,21 @@ namespace MyGame
          float x = pos.X;
          float y = pos.Y;
          int msElapesed = elapsed.AsMilliseconds();
-
-         if (Keyboard.IsKeyPressed(Keyboard.Key.Up)) { y -= Speed * msElapesed;}
-         if (Keyboard.IsKeyPressed(Keyboard.Key.Down)) { y += Speed * msElapesed;}
-         if (Keyboard.IsKeyPressed(Keyboard.Key.Left)) { x -= Speed * msElapesed;}
-         if (Keyboard.IsKeyPressed(Keyboard.Key.Right)) { x += Speed * msElapesed;}
+          int move = (Move.Next(1,4));
         
-         if (Keyboard.IsKeyPressed(Keyboard.Key.W)) { y -= Speed * msElapesed;}
-         if (Keyboard.IsKeyPressed(Keyboard.Key.S)) { y += Speed * msElapesed;}
-         if (Keyboard.IsKeyPressed(Keyboard.Key.A)) { x -= Speed * msElapesed;}
-         if (Keyboard.IsKeyPressed(Keyboard.Key.D)) { x += Speed * msElapesed;}
-         
+        if (move == 1) {y -= Speed * msElapesed;}
+        if (move == 2) {y += Speed * msElapesed;}
+        if (move == 3) {x -= Speed * msElapesed;}
+        if (move == 4) {x += Speed * msElapesed;}
          
          _sprite.Position = new Vector2f(x, y);
         
-        if (_fireTimer > 0)
-            {
-                _fireTimer -= msElapesed;
-            }
-        if (_boltfireTimer > 0)
-            {
-                _boltfireTimer -= msElapesed;
-            }
         
-        if(Keyboard.IsKeyPressed(Keyboard.Key.Space) && _fireTimer <= 0)
+        int _fireTimer = Shoot.Next(1,3);
+        int _boltfireTimer = Shoot.Next(1,4);
+        if(_fireTimer == 2)
             {
-                _fireTimer = FireDelay;
-                _pew.SoundBuffer= Game.GetSoundBuffer("Resources/laserShoot.wav");
-                _pew.Play();
+                
                 FloatRect bounds = _sprite.GetGlobalBounds();
                 float laserx = x + bounds.Width;
                 float laserY = y + bounds.Height / 1.2f;
@@ -94,14 +75,12 @@ namespace MyGame
                 Game.CurrentScene.AddGameObject(laser3);
             
             } 
-        if (Keyboard.IsKeyPressed(Keyboard.Key.F) && _boltfireTimer <= 0)
+        if (_boltfireTimer == 2)
             {
-               _boltfireTimer = boltFireDelay;  
+                
                FloatRect bounds = _sprite.GetGlobalBounds();
                 float boltx = x + bounds.Width;
                 float boltY = y + bounds.Height / 25f;
-                _pew.SoundBuffer= Game.GetSoundBuffer("Resources/laserShoot.wav");
-                _pew.Play();
                 Mega_bolt bolt = new Mega_bolt (new Vector2f(boltx, boltY));
                 Game.CurrentScene.AddGameObject(bolt);
             }

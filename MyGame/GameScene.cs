@@ -36,6 +36,8 @@ namespace MyGame
             AddGameObject (lives);
             Text_coins coins = new Text_coins (new Vector2f(10.0f, 40.0f));
             AddGameObject (coins);
+            Boss boss = new Boss ();
+            AddGameObject (boss);
             
             StreamReader reader = new StreamReader("../../../save.txt");
                 while (!reader.EndOfStream)
@@ -71,7 +73,7 @@ namespace MyGame
         {
             ++_score;
             ++_score_keeptrack;
-            if (_score_keeptrack >= 50)
+            if (_score_keeptrack >= 1)
             {
               StreamWriter writer = new StreamWriter("../../../save.txt");
               writer.WriteLine($"{_lives},{_score},{_coins}");
