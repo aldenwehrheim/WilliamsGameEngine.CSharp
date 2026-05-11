@@ -29,7 +29,7 @@ namespace MyGame
         public override void Update(Time elapsed)
         {
             GameScene scene = (GameScene)Game.CurrentScene;
-            _text.DisplayedString = "score: " + scene.GetScore();
+            _text.DisplayedString = "score: " + scene.GetScore() + scene.GetBoss_status();
 
         }
     }

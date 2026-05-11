@@ -17,6 +17,7 @@ namespace MyGame
         
         public string highscore;
         private int _score_keeptrack = 0;
+        private bool _dead = true;
         private int _coins = 0;
         private int _score = 0;
         private int _lives = 3;
@@ -64,6 +65,18 @@ namespace MyGame
         public int GetScore()
         {
             return _score;
+        }
+        public void IncreaseBoss_dead_true()
+        {
+            _dead = true;
+        }
+        public void IncreaseBoss_dead_false()
+        {
+            _dead = false;
+        }
+        public bool GetBoss_status()
+        {
+            return _dead;
         }
         public int GetCoins()
         {
