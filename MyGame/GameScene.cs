@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Formats.Asn1;
 using System.IO;
 using System.Net.Http.Headers;
@@ -18,12 +19,14 @@ namespace MyGame
         public string highscore;
         private int _score_keeptrack = 0;
         private bool _dead = true;
+        
         private int _coins = 0;
         private int _score = 0;
         private int _lives = 3;
         private string saved_lives;
         private string saved_score;
         private string saved_coins;
+        
         public GameScene()
         {
             
@@ -59,9 +62,9 @@ namespace MyGame
             {
                 _lives = 3;
             }
-            
+            Ship test = new Ship();
+            int test2 = 
         }
-       
         public int GetScore()
         {
             return _score;
@@ -78,6 +81,7 @@ namespace MyGame
         {
             return _dead;
         }
+
         public int GetCoins()
         {
             return _coins;

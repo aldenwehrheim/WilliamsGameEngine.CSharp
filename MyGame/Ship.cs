@@ -7,6 +7,8 @@ using SFML.Window;
 
 using System;
 using System.Numerics;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MyGame
 {
@@ -19,15 +21,26 @@ namespace MyGame
         private const int boltFireDelay = 700;
         private int _fireTimer = 0;
         private int _boltfireTimer = 0;
+        public  int Position;
+        public int follow_pos;
         private readonly Sprite _sprite = new Sprite();
 
 
         public Ship()
         {
-         
+        
+          
          _sprite.Texture = Game.GetTexture("Resources/ship.png");
          _sprite.Position = new Vector2f(100, 100);
-        AssignTag("ship");
+         Vector2f pos = _sprite.Position;
+          float y = pos.Y;
+          follow_pos = Convert.ToInt16(y);
+         AssignTag("ship");
+
+        }
+        public int Get_Ship_Pos()
+        {
+            return follow_pos;
         }
         public override void Draw()
         {
@@ -54,6 +67,7 @@ namespace MyGame
          if (Keyboard.IsKeyPressed(Keyboard.Key.S)) { y += Speed * msElapesed;}
          if (Keyboard.IsKeyPressed(Keyboard.Key.A)) { x -= Speed * msElapesed;}
          if (Keyboard.IsKeyPressed(Keyboard.Key.D)) { x += Speed * msElapesed;}
+         GameScene scene = (GameScene)Game.CurrentScene;
          
          
          _sprite.Position = new Vector2f(x, y);

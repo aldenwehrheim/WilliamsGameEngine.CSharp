@@ -13,6 +13,7 @@ namespace MyGame
     {
         private Random Move = new Random();
         private Random Shoot = new Random();
+        private int test;
         private Random Big_shoot = new Random();
         private const float Speed = 0.5f;
         private readonly Sprite _sprite = new Sprite();
@@ -36,14 +37,14 @@ namespace MyGame
         {
          GameScene scene = (GameScene)Game.CurrentScene;
          scene.IncreaseBoss_dead_false();
-         
+    
          Vector2f pos = _sprite.Position;
          float x = pos.X;
          float y = pos.Y;
           int move = (Move.Next(1,20));
         
-        if (move == 1) {y -= Speed * 20;}
-        if (move == 2) {y += Speed * 20;}
+        if (move == 1 ) {y -= Speed * 20;}
+        if (move == 2 ) {y += Speed * 20;}
          
          _sprite.Position = new Vector2f(x, y);
         
