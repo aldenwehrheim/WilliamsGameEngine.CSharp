@@ -23,7 +23,9 @@ namespace MyGame
         private readonly Text _entertext = new Text();
         private readonly Text _displaycointext = new Text();
         private int Coins;
-
+        private int coins;
+        private int lives;
+        private int score;
        
         public shop_message(int _coins)
         {
@@ -79,29 +81,52 @@ namespace MyGame
             Game.RenderWindow.Draw(_entertext);
             Game.RenderWindow.Draw(_displaycointext);
         }
-
+        GameScene scene = new GameScene();
+        StreamReader reader = new StreamReader("../../../save.txt");
         public override void Update(Time elapsed)
         {
             
-            
-            if (Keyboard.IsKeyPressed(Keyboard.Key.U))
-            {
-                GameScene scene = new GameScene();
-                int Shop_coins = scene.GetCoins();
-                if (Shop_coins >= 10)
+                while (!reader.EndOfStream)
                 {
-                scene.ShopDecreaseCoins();
-                scene.ShopIncreaseLives();
+                    string readfileline = reader.ReadLine();
+                    string [] data = readfileline.Split(',');
+                     lives = Convert.ToInt16(data[0]);
+                     score = Convert.ToInt16(data[1]);
+                     coins = Convert.ToInt16(data[2]);
+                }
+            
+            _displaycointext.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
+            _displaycointext.Position = new Vector2f(95.0f, 660.0f);
+            _displaycointext.CharacterSize = 30;
+            _displaycointext.FillColor = Color.White;
+            _displaycointext.DisplayedString = "Coins: " + Coins;
+
+            int Current_upgrade_L;
+            int Current_upgrade_B;
+            int Current_upgrade_C;
+            
+            if (Keyboard.IsKeyPressed(Keyboard.Key.U) && coins >= 10)
+            {
+                coins -= 10;
+                lives += 5;
+                Coins -= 10;
                 _pickup.SoundBuffer = Game.GetSoundBuffer("Resources/pickup.wav");
                 _pickup.Play();
-                }
-                else{}
+                Thread.Sleep(100);
+                
             }
             
             else if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
             {
                 GameScene scene = new GameScene();
                 Game.SetScene(scene);
+                
+                reader.Close();
+                
+                StreamWriter writer = new StreamWriter("../../../save.txt");
+                writer.WriteLine($"{100},{0},{1}");
+                writer.Close();
+                Thread.Sleep(1000);
             }        
         }
     }

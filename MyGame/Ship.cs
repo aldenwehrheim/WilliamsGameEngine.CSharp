@@ -38,7 +38,7 @@ namespace MyGame
          AssignTag("ship");
 
         }
-        public int Get_Ship_Pos()
+        public float Get_Ship_Pos()
         {
             return follow_pos;
         }

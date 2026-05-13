@@ -19,7 +19,8 @@ namespace MyGame
         public string highscore;
         private int _score_keeptrack = 0;
         private bool _dead = true;
-        
+        //private Ship test = new Ship();
+        private int test2;
         private int _coins = 0;
         private int _score = 0;
         private int _lives = 3;
@@ -40,7 +41,7 @@ namespace MyGame
             AddGameObject (lives);
             Text_coins coins = new Text_coins (new Vector2f(10.0f, 40.0f));
             AddGameObject (coins);
-            Boss boss = new Boss ();
+            Boss boss = new Boss (ship);
             AddGameObject (boss);
             
             StreamReader reader = new StreamReader("../../../save.txt");
@@ -62,8 +63,12 @@ namespace MyGame
             {
                 _lives = 3;
             }
-            Ship test = new Ship();
-            int test2 = 
+            //test2 = Convert.ToInt16(test.Get_Ship_Pos());
+        }
+        
+        public int Get_Ship_Pos()
+        {
+            return test2;
         }
         public int GetScore()
         {

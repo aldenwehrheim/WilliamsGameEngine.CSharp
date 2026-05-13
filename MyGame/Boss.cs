@@ -17,9 +17,11 @@ namespace MyGame
         private Random Big_shoot = new Random();
         private const float Speed = 0.5f;
         private readonly Sprite _sprite = new Sprite();
+        private Ship ship;
         
-        public Boss()
+        public Boss(Ship ship)
         {
+         this.ship = ship;
          _sprite.Texture = Game.GetTexture("Resources/death_ship_of doom.png");
          _sprite.Position = new Vector2f(1000,300);
         AssignTag("bad_ship");
@@ -43,8 +45,8 @@ namespace MyGame
          float y = pos.Y;
           int move = (Move.Next(1,20));
         
-        if (move == 1 ) {y -= Speed * 20;}
-        if (move == 2 ) {y += Speed * 20;}
+        if (move == 1 && y >= Convert.ToInt16(ship.Get_Ship_Pos())) {y -= Speed * 20;}
+        if (move == 2 && y <= Convert.ToInt16(ship.Get_Ship_Pos())) {y += Speed * 20;}
          
          _sprite.Position = new Vector2f(x, y);
         
