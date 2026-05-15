@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Xml.Linq;
 using SFML.Audio;
+using System.Security.AccessControl;
 
 namespace MyGame
 {
@@ -18,6 +19,7 @@ namespace MyGame
         private readonly Sound _pickup= new Sound();
         private readonly Text _guntext = new Text();
         private readonly Text _livestext = new Text();
+        private readonly Text _livesdisplaytext = new Text();
         private readonly Text _boosttext = new Text();
         private readonly Text _cointext = new Text();
         private readonly Text _entertext = new Text();
@@ -33,7 +35,8 @@ namespace MyGame
             
             Coins = _coins;
             GameScene scene = (GameScene)Game.CurrentScene;
-        
+            
+
             _guntext.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
             _guntext.Position = new Vector2f(100.0f, 375.0f);
             _guntext.CharacterSize = 20;
@@ -69,6 +72,13 @@ namespace MyGame
             _displaycointext.CharacterSize = 30;
             _displaycointext.FillColor = Color.White;
             _displaycointext.DisplayedString = "Coins: " + Coins;
+
+            _livesdisplaytext.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
+            _livesdisplaytext.Position = new Vector2f(500.0f, 600.0f);
+            _livesdisplaytext.CharacterSize = 300;
+            _livesdisplaytext.FillColor = Color.Green;
+            _livesdisplaytext.DisplayedString = "Lives: " + lives;
+            
         }
 
         public override void Draw()
@@ -95,6 +105,9 @@ namespace MyGame
                      coins = Convert.ToInt16(data[2]);
                 }
             
+         
+            
+
             _displaycointext.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
             _displaycointext.Position = new Vector2f(95.0f, 660.0f);
             _displaycointext.CharacterSize = 30;
@@ -118,14 +131,15 @@ namespace MyGame
             
             else if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
             {
-                GameScene scene = new GameScene();
-                Game.SetScene(scene);
-                
                 reader.Close();
                 
                 StreamWriter writer = new StreamWriter("../../../save.txt");
-                writer.WriteLine($"{100},{0},{1}");
+                writer.WriteLine($"{lives},{score},{coins}");
                 writer.Close();
+                
+                GameScene scene = new GameScene();
+                Game.SetScene(scene);
+                
                 Thread.Sleep(1000);
             }        
         }
