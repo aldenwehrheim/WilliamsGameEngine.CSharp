@@ -35,7 +35,7 @@ namespace MyGame
             
             GameScene scene = (GameScene)Game.CurrentScene;
             
-            _text2.DisplayedString = "LIVES?: " + scene.Getlives();
+            _text2.DisplayedString = "LIVES: " + scene.Getlives();
 
         }
     }

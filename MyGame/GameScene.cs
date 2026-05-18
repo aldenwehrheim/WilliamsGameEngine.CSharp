@@ -27,6 +27,10 @@ namespace MyGame
         private string saved_lives;
         private string saved_score;
         private string saved_coins;
+        private int laser_upgrade = 200;
+        private int speed_upgrade;
+        private int coins_upgrade;
+
         
         public GameScene()
         {
@@ -52,6 +56,7 @@ namespace MyGame
                     saved_lives = data[0];
                     saved_score = data[1];
                     saved_coins = data[2];
+                    laser_upgrade = Convert.ToInt32(data[3]);
                 }
                 reader.Close();
             
@@ -73,6 +78,10 @@ namespace MyGame
         public int GetScore()
         {
             return _score;
+        }
+        public int Get_L_upgrade()
+        {
+            return laser_upgrade;
         }
         public void IncreaseBoss_dead_true()
         {

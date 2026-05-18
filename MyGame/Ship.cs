@@ -15,6 +15,7 @@ namespace MyGame
    
     public class Ship : GameObject
     {
+        GameScene scene = new GameScene();
         private readonly Sound _pew = new Sound();
         private const float Speed = 0.5f;
         private const int FireDelay = 200;

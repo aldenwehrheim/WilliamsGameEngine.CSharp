@@ -20,8 +20,7 @@ namespace MyGame
             AddGameObject(upgrade_coins);
             coins_display Coins_display = new coins_display(new Vector2f(10.0f, 650.0f));
             AddGameObject(Coins_display);
-
-           
+          
         }
     
     }
