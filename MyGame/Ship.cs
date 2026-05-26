@@ -3,8 +3,6 @@ using SFML.Audio;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
-
-
 using System;
 using System.Numerics;
 using System.Runtime.InteropServices;
@@ -15,7 +13,6 @@ namespace MyGame
    
     public class Ship : GameObject
     {
-        GameScene scene = new GameScene();
         private readonly Sound _pew = new Sound();
         private const float Speed = 0.5f;
         private const int FireDelay = 200;
@@ -25,19 +22,18 @@ namespace MyGame
         public  int Position;
         public int follow_pos;
         private readonly Sprite _sprite = new Sprite();
-
+        
 
         public Ship()
         {
-        
-          
+            GameScene scene = (GameScene)Game.CurrentScene;
+            FireDelay = Convert.ToInt32(scene.Get_upgrade_L());
          _sprite.Texture = Game.GetTexture("Resources/ship.png");
          _sprite.Position = new Vector2f(100, 100);
          Vector2f pos = _sprite.Position;
           float y = pos.Y;
           follow_pos = Convert.ToInt16(y);
          AssignTag("ship");
-
         }
         public float Get_Ship_Pos()
         {

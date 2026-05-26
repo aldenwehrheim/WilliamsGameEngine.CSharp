@@ -27,9 +27,13 @@ namespace MyGame
         private string saved_lives;
         private string saved_score;
         private string saved_coins;
-        private int laser_upgrade = 200;
+        private int laser_upgrade;
+        private string saved_laser_upgrade;
         private int speed_upgrade;
         private int coins_upgrade;
+        private string saved_speed_upgrade;
+        private string saved_coins_upgrade;
+        private int ship_L_upgrade;
 
         
         public GameScene()
@@ -56,13 +60,19 @@ namespace MyGame
                     saved_lives = data[0];
                     saved_score = data[1];
                     saved_coins = data[2];
-                    laser_upgrade = Convert.ToInt32(data[3]);
+                    saved_laser_upgrade = (data[3]);
+                    saved_speed_upgrade = (data[4]);
+                    saved_coins_upgrade = (data[5]);
                 }
                 reader.Close();
             
             _lives = Convert.ToInt32(saved_lives);
             _coins = Convert.ToInt32(saved_coins);
             _score = Convert.ToInt32(saved_score);
+            laser_upgrade = Convert.ToInt32(saved_laser_upgrade);
+            speed_upgrade = Convert.ToInt32(saved_speed_upgrade);
+            coins_upgrade = Convert.ToInt32(saved_coins_upgrade);
+            
             
             if (_lives <= 0)
             {
@@ -79,7 +89,7 @@ namespace MyGame
         {
             return _score;
         }
-        public int Get_L_upgrade()
+        public int Get_upgrade_L()
         {
             return laser_upgrade;
         }
@@ -107,7 +117,7 @@ namespace MyGame
             if (_score_keeptrack >= 1)
             {
               StreamWriter writer = new StreamWriter("../../../save.txt");
-              writer.WriteLine($"{_lives},{_score},{_coins}");
+              writer.WriteLine($"{_lives},{_score},{_coins},{laser_upgrade},{speed_upgrade},{coins_upgrade}");
               writer.Close();
               shop_scene shop = new shop_scene(_coins);
               Game.SetScene(shop); 

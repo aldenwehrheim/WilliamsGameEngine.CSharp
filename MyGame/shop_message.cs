@@ -24,21 +24,37 @@ namespace MyGame
         private readonly Text _cointext = new Text();
         private readonly Text _entertext = new Text();
         private readonly Text _displaycointext = new Text();
+        private readonly Text _gun_upgrade_text = new Text();
+        private readonly Text _boost_upgrade_text = new Text();
+        private readonly Text _coin_upgrade_text = new Text();
         private int Coins;
         private int coins;
         private int lives;
         private int score;
         private int Current_upgrade_L;
-        private int placehold_upgrade_L;
-
+        private int Current_upgrade_B;
+        private int Current_upgrade_C;
         public shop_message(int _coins)
         {
 
 
             Coins = _coins;
             GameScene scene = (GameScene)Game.CurrentScene;
-
-
+            
+            StreamReader reader = new StreamReader("../../../save.txt");
+            while (!reader.EndOfStream)
+            {
+                string readfileline = reader.ReadLine();
+                string[] data = readfileline.Split(',');
+                    lives = Convert.ToInt32(data[0]);
+                    score = Convert.ToInt32(data[1]);
+                    coins = Convert.ToInt32(data[2]);
+                    Current_upgrade_L = Convert.ToInt32(data[3]);
+                    Current_upgrade_B = Convert.ToInt32(data[4]);
+                    Current_upgrade_C = Convert.ToInt32(data[5]);
+            }
+            reader.Close();
+            
             _guntext.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
             _guntext.Position = new Vector2f(100.0f, 375.0f);
             _guntext.CharacterSize = 20;
@@ -81,6 +97,24 @@ namespace MyGame
             _livesdisplaytext.FillColor = Color.Green;
             _livesdisplaytext.DisplayedString = "Lives: " + lives;
 
+            _gun_upgrade_text.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
+            _gun_upgrade_text.Position = new Vector2f(95.0f, 600.0f);
+            _gun_upgrade_text.CharacterSize = 30;
+            _gun_upgrade_text.FillColor = Color.Red;
+            _gun_upgrade_text.DisplayedString = "laser upgrade: " + (Current_upgrade_L / -40 + 5) + "/5";
+
+           _boost_upgrade_text.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
+            _boost_upgrade_text.Position = new Vector2f(95.0f, 570.0f);
+            _boost_upgrade_text.CharacterSize = 30;
+            _boost_upgrade_text.FillColor = Color.Blue;
+            _boost_upgrade_text.DisplayedString = "boost upgrade: " + (Current_upgrade_B / -40 + 5) + "/5";
+
+            _coin_upgrade_text.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
+            _coin_upgrade_text.Position = new Vector2f(95.0f, 540.0f);
+            _coin_upgrade_text.CharacterSize = 30;
+            _coin_upgrade_text.FillColor = Color.Yellow;
+            _coin_upgrade_text.DisplayedString = "coin upgrade: " + (Current_upgrade_C / -40 + 5) + "/5";
+
         }
 
         public override void Draw()
@@ -92,37 +126,19 @@ namespace MyGame
             Game.RenderWindow.Draw(_cointext);
             Game.RenderWindow.Draw(_entertext);
             Game.RenderWindow.Draw(_displaycointext);
+            Game.RenderWindow.Draw(_gun_upgrade_text);
+            Game.RenderWindow.Draw(_boost_upgrade_text);
+            Game.RenderWindow.Draw(_coin_upgrade_text);
         }
-        GameScene scene = new GameScene();
-        StreamReader reader = new StreamReader("../../../save.txt");
+        
         public override void Update(Time elapsed)
         {
-
-            while (!reader.EndOfStream)
-            {
-                string readfileline = reader.ReadLine();
-                string[] data = readfileline.Split(',');
-                lives = Convert.ToInt16(data[0]);
-                score = Convert.ToInt16(data[1]);
-                coins = Convert.ToInt16(data[2]);
-            }
-
-
-            _livesdisplaytext.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
-            _livesdisplaytext.Position = new Vector2f(95.0f, 630.0f);
-            _livesdisplaytext.CharacterSize = 30;
-            _livesdisplaytext.FillColor = Color.Green;
+            
             _livesdisplaytext.DisplayedString = "Lives: " + lives;
-
-            _displaycointext.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
-            _displaycointext.Position = new Vector2f(95.0f, 660.0f);
-            _displaycointext.CharacterSize = 30;
-            _displaycointext.FillColor = Color.White;
             _displaycointext.DisplayedString = "Coins: " + Coins;
-
-
-            int Current_upgrade_B;
-            int Current_upgrade_C;
+            _gun_upgrade_text.DisplayedString = "laser upgrade: " + (Current_upgrade_L / -40 + 5) + "/5";
+            _boost_upgrade_text.DisplayedString = "boost upgrade: " + (Current_upgrade_B / -40 + 5) + "/5";
+            _coin_upgrade_text.DisplayedString = "coin upgrade: " + (Current_upgrade_C / -40 + 5) + "/5";
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.U) && coins >= 10)
             {
@@ -135,28 +151,65 @@ namespace MyGame
 
             }
 
-            else if (Current_upgrade_L >= 40 && Keyboard.IsKeyPressed(Keyboard.Key.Y) && coins >= 15)
+            if (Current_upgrade_L >= 40 && Keyboard.IsKeyPressed(Keyboard.Key.Y) && coins >= 15)
             {
+               
                 coins -= 15;
                 Current_upgrade_L -= 40;
 
                 Coins -= 15;
                 _pickup.SoundBuffer = Game.GetSoundBuffer("Resources/pickup.wav");
                 _pickup.Play();
-                if (Current_upgrade_L <= 0)
+                  if (Current_upgrade_L <= 0)
                 {
                     _guntext.DisplayedString = "upgrade max";
                 }
+               
+                Thread.Sleep(100);
+            
+            }
+
+            if (Current_upgrade_B >= 40 && Keyboard.IsKeyPressed(Keyboard.Key.I) && coins >= 15)
+            {
+               
+                coins -= 15;
+                Current_upgrade_B -= 40;
+
+                Coins -= 15;
+                _pickup.SoundBuffer = Game.GetSoundBuffer("Resources/pickup.wav");
+                _pickup.Play();
+                  if (Current_upgrade_B <= 0)
+                {
+                    _boosttext.DisplayedString = "upgrade max";
+                }
+               
+                Thread.Sleep(100);
+            
+            }
+
+            if (Current_upgrade_C >= 40 && Keyboard.IsKeyPressed(Keyboard.Key.O) && coins >= 20)
+            {
+               
+                coins -= 20;
+                Current_upgrade_C -= 40;
+
+                Coins -= 20;
+                _pickup.SoundBuffer = Game.GetSoundBuffer("Resources/pickup.wav");
+                _pickup.Play();
+                  if (Current_upgrade_C <= 0)
+                {
+                    _cointext.DisplayedString = "upgrade max";
+                }
+               
                 Thread.Sleep(100);
             
             }
 
             else if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
             {
-                reader.Close();
 
                 StreamWriter writer = new StreamWriter("../../../save.txt");
-                writer.WriteLine($"{lives},{score},{coins}");
+                writer.WriteLine($"{lives},{score},{coins},{Current_upgrade_L},{Current_upgrade_B},{Current_upgrade_C}");
                 writer.Close();
 
                 GameScene scene = new GameScene();
