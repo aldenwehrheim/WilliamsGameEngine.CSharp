@@ -14,20 +14,17 @@ namespace MyGame
     public class Ship : GameObject
     {
         private readonly Sound _pew = new Sound();
-        private const float Speed = 0.5f;
-        private const int FireDelay = 200;
+        private float Speed = 0.4f;
+        public int FireDelay = 200;
         private const int boltFireDelay = 700;
         private int _fireTimer = 0;
         private int _boltfireTimer = 0;
         public  int Position;
         public int follow_pos;
         private readonly Sprite _sprite = new Sprite();
-        
 
         public Ship()
         {
-            GameScene scene = (GameScene)Game.CurrentScene;
-            FireDelay = Convert.ToInt32(scene.Get_upgrade_L());
          _sprite.Texture = Game.GetTexture("Resources/ship.png");
          _sprite.Position = new Vector2f(100, 100);
          Vector2f pos = _sprite.Position;
@@ -49,7 +46,10 @@ namespace MyGame
         }
         public override void Update(Time elapsed)
         {
-          
+         GameScene scene = new GameScene();
+         int hold_firedelay = scene.Get_upgrade_L();
+         FireDelay = hold_firedelay;
+
          Vector2f pos = _sprite.Position;
          float x = pos.X;
          float y = pos.Y;
@@ -64,7 +64,7 @@ namespace MyGame
          if (Keyboard.IsKeyPressed(Keyboard.Key.S)) { y += Speed * msElapesed;}
          if (Keyboard.IsKeyPressed(Keyboard.Key.A)) { x -= Speed * msElapesed;}
          if (Keyboard.IsKeyPressed(Keyboard.Key.D)) { x += Speed * msElapesed;}
-         GameScene scene = (GameScene)Game.CurrentScene;
+         
          
          
          _sprite.Position = new Vector2f(x, y);

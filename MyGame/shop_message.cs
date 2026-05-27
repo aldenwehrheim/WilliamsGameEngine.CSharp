@@ -32,8 +32,9 @@ namespace MyGame
         private int lives;
         private int score;
         private int Current_upgrade_L;
-        private int Current_upgrade_B;
+        private double Current_upgrade_B;
         private int Current_upgrade_C;
+        private int boost_show;
         public shop_message(int _coins)
         {
 
@@ -50,8 +51,9 @@ namespace MyGame
                     score = Convert.ToInt32(data[1]);
                     coins = Convert.ToInt32(data[2]);
                     Current_upgrade_L = Convert.ToInt32(data[3]);
-                    Current_upgrade_B = Convert.ToInt32(data[4]);
+                    Current_upgrade_B = Convert.ToDouble(data[4]);
                     Current_upgrade_C = Convert.ToInt32(data[5]);
+                    boost_show = Convert.ToInt32(data[6]);
             }
             reader.Close();
             
@@ -133,11 +135,14 @@ namespace MyGame
         
         public override void Update(Time elapsed)
         {
-            
+             if (Current_upgrade_L <= 0)
+                {
+                    _guntext.DisplayedString = "upgrade max";
+                }
             _livesdisplaytext.DisplayedString = "Lives: " + lives;
             _displaycointext.DisplayedString = "Coins: " + Coins;
             _gun_upgrade_text.DisplayedString = "laser upgrade: " + (Current_upgrade_L / -40 + 5) + "/5";
-            _boost_upgrade_text.DisplayedString = "boost upgrade: " + (Current_upgrade_B / -40 + 5) + "/5";
+            _boost_upgrade_text.DisplayedString = "boost upgrade: " + (boost_show) + "/5";
             _coin_upgrade_text.DisplayedString = "coin upgrade: " + (Current_upgrade_C / -40 + 5) + "/5";
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.U) && coins >= 10)
@@ -160,25 +165,21 @@ namespace MyGame
                 Coins -= 15;
                 _pickup.SoundBuffer = Game.GetSoundBuffer("Resources/pickup.wav");
                 _pickup.Play();
-                  if (Current_upgrade_L <= 0)
-                {
-                    _guntext.DisplayedString = "upgrade max";
-                }
                
                 Thread.Sleep(100);
             
             }
 
-            if (Current_upgrade_B >= 40 && Keyboard.IsKeyPressed(Keyboard.Key.I) && coins >= 15)
+            if (Current_upgrade_B <= 1.4  && Keyboard.IsKeyPressed(Keyboard.Key.I) && coins >= 15)
             {
                
                 coins -= 15;
-                Current_upgrade_B -= 40;
+                Current_upgrade_B += 0.2;
 
                 Coins -= 15;
                 _pickup.SoundBuffer = Game.GetSoundBuffer("Resources/pickup.wav");
                 _pickup.Play();
-                  if (Current_upgrade_B <= 0)
+                  if (Current_upgrade_B >= 1.4)
                 {
                     _boosttext.DisplayedString = "upgrade max";
                 }

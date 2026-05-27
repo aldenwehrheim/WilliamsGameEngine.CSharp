@@ -13,7 +13,6 @@ namespace MyGame
     {
         private Random Move = new Random();
         private Random Shoot = new Random();
-        private int test;
         private Random Big_shoot = new Random();
         private const float Speed = 0.5f;
         private readonly Sprite _sprite = new Sprite();
