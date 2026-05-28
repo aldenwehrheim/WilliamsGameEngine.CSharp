@@ -17,7 +17,7 @@ namespace MyGame
             // Initialize the game.
             Game.Initialize(WindowWidth, WindowHeight, WindowTitle);
             StreamWriter writer = new StreamWriter("../../../save.txt");
-              writer.WriteLine($"{3},{0},{500},{200},{0},{200}");
+              writer.WriteLine($"{3},{0},{500},{200},{0},{200},{1}");
               writer.Close();
             // Create our scene.
             GameScene scene = new GameScene();

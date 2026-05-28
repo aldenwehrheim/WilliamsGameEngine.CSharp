@@ -34,13 +34,13 @@ namespace MyGame
         private string saved_speed_upgrade;
         private string saved_coins_upgrade;
         private int ship_L_upgrade;
+        private double saved_speed_upgrade_show;
 
         
         public GameScene()
         {
             
-            Ship ship = new Ship();
-            AddGameObject(ship);
+            
             Meteor_spawner meteor_Spawner = new Meteor_spawner();
             AddGameObject(meteor_Spawner);
             Score score = new Score(new Vector2f(10.0f, 10.0f));
@@ -49,8 +49,12 @@ namespace MyGame
             AddGameObject (lives);
             Text_coins coins = new Text_coins (new Vector2f(10.0f, 40.0f));
             AddGameObject (coins);
+            Ship ship = new Ship();
+            AddGameObject(ship);
             Boss boss = new Boss (ship);
             AddGameObject (boss);
+            
+            
             
             StreamReader reader = new StreamReader("../../../save.txt");
                 while (!reader.EndOfStream)
@@ -63,6 +67,8 @@ namespace MyGame
                     saved_laser_upgrade = (data[3]);
                     saved_speed_upgrade = (data[4]);
                     saved_coins_upgrade = (data[5]);
+                    saved_speed_upgrade_show = Convert.ToDouble(data[6]);
+
                 }
                 reader.Close();
             
@@ -92,6 +98,10 @@ namespace MyGame
         public int Get_upgrade_L()
         {
             return laser_upgrade;
+        }
+        public float Get_upgrade_B()
+        {
+            return (float)(0.2 * saved_speed_upgrade_show + 0.2);
         }
         public void IncreaseBoss_dead_true()
         {

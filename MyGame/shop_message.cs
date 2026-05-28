@@ -142,7 +142,7 @@ namespace MyGame
             _livesdisplaytext.DisplayedString = "Lives: " + lives;
             _displaycointext.DisplayedString = "Coins: " + Coins;
             _gun_upgrade_text.DisplayedString = "laser upgrade: " + (Current_upgrade_L / -40 + 5) + "/5";
-            _boost_upgrade_text.DisplayedString = "boost upgrade: " + (boost_show) + "/5";
+            _boost_upgrade_text.DisplayedString = "boost upgrade: " + boost_show + "/5";
             _coin_upgrade_text.DisplayedString = "coin upgrade: " + (Current_upgrade_C / -40 + 5) + "/5";
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.U) && coins >= 10)
@@ -175,7 +175,10 @@ namespace MyGame
                
                 coins -= 15;
                 Current_upgrade_B += 0.2;
-
+                if (boost_show <= 5)
+                {
+                    boost_show += 1;
+                }
                 Coins -= 15;
                 _pickup.SoundBuffer = Game.GetSoundBuffer("Resources/pickup.wav");
                 _pickup.Play();
