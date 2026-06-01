@@ -213,7 +213,7 @@ namespace MyGame
             {
 
                 StreamWriter writer = new StreamWriter("../../../save.txt");
-                writer.WriteLine($"{lives},{score},{coins},{Current_upgrade_L},{Current_upgrade_B},{Current_upgrade_C}");
+                writer.WriteLine($"{lives},{score},{coins},{Current_upgrade_L},{Current_upgrade_B},{Current_upgrade_C},{boost_show}");
                 writer.Close();
 
                 GameScene scene = new GameScene();

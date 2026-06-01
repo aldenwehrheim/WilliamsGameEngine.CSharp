@@ -51,8 +51,8 @@ namespace MyGame
         {
         GameScene scene = (GameScene)Game.CurrentScene;
         FireDelay = Convert.ToInt32(scene.Get_upgrade_L());
-        
         Speed = scene.Get_upgrade_B();
+
          Vector2f pos = _sprite.Position;
          float x = pos.X;
          float y = pos.Y;
