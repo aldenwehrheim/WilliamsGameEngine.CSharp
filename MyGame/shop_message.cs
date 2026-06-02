@@ -54,6 +54,7 @@ namespace MyGame
                     Current_upgrade_B = Convert.ToDouble(data[4]);
                     Current_upgrade_C = Convert.ToInt32(data[5]);
                     boost_show = Convert.ToInt32(data[6]);
+                    
             }
             reader.Close();
             
@@ -109,13 +110,13 @@ namespace MyGame
             _boost_upgrade_text.Position = new Vector2f(95.0f, 570.0f);
             _boost_upgrade_text.CharacterSize = 30;
             _boost_upgrade_text.FillColor = Color.Blue;
-            _boost_upgrade_text.DisplayedString = "boost upgrade: " + (Current_upgrade_B / -40 + 5) + "/5";
+            _boost_upgrade_text.DisplayedString = "boost upgrade: " + Current_upgrade_B + "/5";
 
             _coin_upgrade_text.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
             _coin_upgrade_text.Position = new Vector2f(95.0f, 540.0f);
             _coin_upgrade_text.CharacterSize = 30;
             _coin_upgrade_text.FillColor = Color.Yellow;
-            _coin_upgrade_text.DisplayedString = "coin upgrade: " + (Current_upgrade_C / -40 + 5) + "/5";
+            _coin_upgrade_text.DisplayedString = "coin upgrade: " + Current_upgrade_C + "/5";
 
         }
 
@@ -139,11 +140,19 @@ namespace MyGame
                 {
                     _guntext.DisplayedString = "upgrade max";
                 }
+             if (boost_show >= 5)
+                {
+                    _boosttext.DisplayedString = "upgrade max";
+                }
+             if (Current_upgrade_C >= 5)
+                {
+                    _cointext.DisplayedString = "upgrade max";
+                }   
             _livesdisplaytext.DisplayedString = "Lives: " + lives;
             _displaycointext.DisplayedString = "Coins: " + Coins;
             _gun_upgrade_text.DisplayedString = "laser upgrade: " + (Current_upgrade_L / -40 + 5) + "/5";
             _boost_upgrade_text.DisplayedString = "boost upgrade: " + boost_show + "/5";
-            _coin_upgrade_text.DisplayedString = "coin upgrade: " + (Current_upgrade_C / -40 + 5) + "/5";
+            _coin_upgrade_text.DisplayedString = "coin upgrade: " + Current_upgrade_C + "/5";
 
             if (Keyboard.IsKeyPressed(Keyboard.Key.U) && coins >= 10)
             {
@@ -166,44 +175,39 @@ namespace MyGame
                 _pickup.SoundBuffer = Game.GetSoundBuffer("Resources/pickup.wav");
                 _pickup.Play();
                
-                Thread.Sleep(100);
+                Thread.Sleep(200);
             
             }
 
-            if (Current_upgrade_B <= 1.4  && Keyboard.IsKeyPressed(Keyboard.Key.I) && coins >= 15)
+            if (boost_show < 5  && Keyboard.IsKeyPressed(Keyboard.Key.I) && coins >= 15)
             {
                
                 coins -= 15;
-                Current_upgrade_B += 0.2;
-                if (boost_show <= 5)
-                {
-                    boost_show += 1;
-                }
+                Current_upgrade_B += 0.15;
+                    
+                boost_show += 1;
+                
                 Coins -= 15;
                 _pickup.SoundBuffer = Game.GetSoundBuffer("Resources/pickup.wav");
                 _pickup.Play();
-                  if (Current_upgrade_B >= 1.4)
+                  if (boost_show >= 5)
                 {
                     _boosttext.DisplayedString = "upgrade max";
                 }
                
-                Thread.Sleep(100);
+                Thread.Sleep(200);
             
             }
 
-            if (Current_upgrade_C >= 40 && Keyboard.IsKeyPressed(Keyboard.Key.O) && coins >= 20)
+            if (Current_upgrade_C < 5 && Keyboard.IsKeyPressed(Keyboard.Key.O) && coins >= 20)
             {
                
                 coins -= 20;
-                Current_upgrade_C -= 40;
+                ++ Current_upgrade_C;
 
                 Coins -= 20;
                 _pickup.SoundBuffer = Game.GetSoundBuffer("Resources/pickup.wav");
                 _pickup.Play();
-                  if (Current_upgrade_C <= 0)
-                {
-                    _cointext.DisplayedString = "upgrade max";
-                }
                
                 Thread.Sleep(100);
             

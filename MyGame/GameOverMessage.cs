@@ -37,7 +37,7 @@ namespace MyGame
             if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
             {
                 StreamWriter writer = new StreamWriter("../../../save.txt");
-              writer.WriteLine($"{3},{0},{0}");
+              writer.WriteLine($"{5},{0},{50},{200},{0.7},{0},{0},");
               writer.Close();
                 GameScene scene = new GameScene();
                 Game.SetScene(scene);
