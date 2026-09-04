@@ -123,7 +123,7 @@ namespace MyGame
         {
             ++_score;
             ++_score_keeptrack;
-            if (_score_keeptrack >= 1)
+            if (_score_keeptrack >= 10)
             {
               StreamWriter writer = new StreamWriter("../../../save.txt");
               writer.WriteLine($"{_lives},{_score},{_coins},{laser_upgrade},{speed_upgrade},{coins_upgrade},{saved_speed_upgrade_show}");

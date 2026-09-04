@@ -41,10 +41,10 @@ namespace MyGame
                     Game.CurrentScene.AddGameObject(meteor);
 
                 }
-                _megtimer -= msElapsed;
-                if (_megtimer <= 0)
+                //_megtimer -= msElapsed;
+                //if (_megtimer <= 0)
                 {
-                    _megtimer = SpawnDelaymega;
+                //    _megtimer = SpawnDelaymega;
 
                     Vector2u size = Game.RenderWindow.Size;
 
